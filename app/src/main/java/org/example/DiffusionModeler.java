@@ -1,15 +1,11 @@
 package org.example;
-
 import java.util.Arrays;
 
-public class DiffusionModeler {
-  // This is just an example class to demonstrate how everything works
-  // You should delete this file when you implement your own solution
-  
+public class DiffusionModeler {  
   public String modelDiffusion(int steps, int trials) {
     int[] positions = new int[trials];
     for (int i = 0; i < trials; i++){
-      //TODO: Time this section of code
+      long startTime = System.currentTimeMillis(); //Time this section of code
       int currentPosition = 0;
       //random number generation Java
       for(int j = 0; j < steps; j++){
@@ -20,6 +16,10 @@ public class DiffusionModeler {
           currentPosition++;
         }
       }
+
+      long endTime = System.currentTimeMillis();
+      long timeTaken = endTime - startTime;
+      System.out.printf("%d\t%d\t%d\t%d%n", steps, i, currentPosition, timeTaken);
       positions[i] = currentPosition;
     }
     return Arrays.toString(positions);
