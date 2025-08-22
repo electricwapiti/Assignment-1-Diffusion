@@ -16,6 +16,13 @@ public class App {
       for (int i = 0; i < trials; i++) {
           int[] result = modeler.modelDiffusion(steps, 1); // single trial
           System.out.printf("%d\t%d\t%d%n", steps, i + 1, result[0]);
+          //Compute timing information thru benchmark, then manually create table
+          
+          // for each combination of steps & trials
+          //main fxn -- final output distance
+          //benchmark -- avg time over trials
+
+
       }
     }
 }

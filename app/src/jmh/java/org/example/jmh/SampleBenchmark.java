@@ -6,15 +6,17 @@ import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.TimeUnit;
 
+
+/// Start off by using the most efficient options possible (least iterations, least trials)
+/// Find max for lines 19 & 22 each
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Thread)
-@Fork(value = 1, warmups = 2)
-@Warmup(iterations = 2)
-@Measurement(iterations = 5)
+@Warmup(iterations = 1, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 1)
 public class SampleBenchmark {
 
-    @Param({"10", "100", "1000", "10000", "100000"})
+    @Param({"10"})
     int steps;
 
     @Param({"10"})
@@ -30,6 +32,9 @@ public class SampleBenchmark {
     @Benchmark
     public void modelDiffusionBenchmark(Blackhole bh) {
         int[] output = modeler.modelDiffusion(steps, trials);
+        // try doing this with only steps
+        //Limit: 10 seconds per operation
+        // look for "score" when you run the benchmark with ./gradlew jmh
         bh.consume(output);
     }
 }
