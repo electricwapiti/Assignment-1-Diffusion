@@ -13,15 +13,9 @@ public class App {
     }
 
     private static void runAndPrint(DiffusionModeler modeler, int steps, int trials) {
-      System.out.println("Number of Steps (N)\tTrial Number (M)\tFinal Position (D)\tTime Taken (ms)");
-
       for (int i = 0; i < trials; i++) {
-          long startTime = System.nanoTime();
           int[] result = modeler.modelDiffusion(steps, 1); // single trial
-          long endTime = System.nanoTime();
-          long durationMs = (endTime - startTime) / 1_000_000;
-
-          System.out.printf("%d\t%d\t%d\t%d%n", steps, i + 1, result[0], durationMs);
+          System.out.printf("%d\t%d\t%d%n", steps, i + 1, result[0]);
       }
     }
 }
